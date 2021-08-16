@@ -1,13 +1,18 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-import java.io.Serializable;
 
-@Document(indexName = "ec3", type = "product3", replicas = 0, shards = 5)
+import java.io.Serializable;
+import java.util.Date;
+
+@Document(indexName = "ec16", type = "product4", replicas = 0, shards = 5)
 //indexName索引名称 可以理解为数据库名 必须为小写 不然会报org.elasticsearch.indices.InvalidIndexNameException异常
 //type类型 可以理解为表名
 @Data
@@ -36,14 +41,17 @@ public class Product implements Serializable {
      */
     private String images;
     private String body;
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "uuuu-MM-dd'T'HH:mm:ss.SSSZZ")
+    private Date createDate;
 
-    public Product(Long id, String name, String category, Double price, String images, String body) {
-    this.id = id;
+    public Product(Long id, String name, String category, Double price, String images, String body, Date createDate) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.price = price;
         this.images = images;
         this.body = body;
+        this.createDate = createDate;
     }
 
     public Product() {
@@ -95,5 +103,13 @@ public class Product implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

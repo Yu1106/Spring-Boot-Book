@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -34,7 +36,7 @@ public class ProductControllerTest {
     @Test
     public void save() {
         long id= System.currentTimeMillis();
-        Product product = new Product(id,"苹xx果ss","水果",7.99,"/img/p1.jpg","金苹果哦");
+        Product product = new Product(id,"苹xx果ss","水果",7.99,"/img/p1.jpg","金苹果哦", new Date());
         productRepository.save(product);
 
         System.out.println(product.getId());
@@ -51,7 +53,7 @@ public class ProductControllerTest {
     public void update() {
         long id=1557032203515L;
   Product product = new Product(id,
-          "金帅","水果",7.99,"/img/p1.jpg","金帅也和红富士一样，非常好吃，脆脆的");
+          "金帅","水果",7.99,"/img/p1.jpg","金帅也和红富士一样，非常好吃，脆脆的", new Date());
    productRepository.save(product);
     }
 
