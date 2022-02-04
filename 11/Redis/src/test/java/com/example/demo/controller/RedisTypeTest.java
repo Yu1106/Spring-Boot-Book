@@ -68,8 +68,7 @@ public class RedisTypeTest {
 
     @Test
     public void string3() {
-        // 覆写(overwrite) 给定 key 所储存的字符串值，从偏移量 offset 开始
-        redisTemplate.opsForValue().set("key", "helloworld", 7);
+        redisTemplate.opsForValue().set("key", "hello world", 6, TimeUnit.SECONDS);
         System.out.println(redisTemplate.opsForValue().get("key"));
 
     }
